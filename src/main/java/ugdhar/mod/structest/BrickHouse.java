@@ -59,7 +59,7 @@ public class BrickHouse extends ScatteredStructure<ProbabilityConfig> {
 			int worldZ = chunkZ * 16;
 			BlockPos blockpos = new BlockPos(worldX, 90, worldZ);
 			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			// DISSECT IGLOOPIECES
+			// DISSECT IGLOOPIECES meow
 			this.recalculateStructureSize();
 		}
 		
