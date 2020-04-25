@@ -1,0 +1,65 @@
+package ugdhar.mod.structest;
+
+import java.util.Random;
+
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
+import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
+
+public class BrickHousePiece {
+	
+	public static class Piece extends TemplateStructurePiece {
+		
+		public Piece(TemplateManager templateMgr, CompoundNBT nbt) {
+			super(StrucTest.BRICK_HOUSE_PIECE, nbt);
+			this.setupTemplate(templateMgr);
+		}
+
+		public Piece(TemplateManager templateMgr, ResourceLocation p_i49313_2_, BlockPos p_i49313_3_, Rotation p_i49313_4_, int p_i49313_5_) {
+			super(StrucTest.BRICK_HOUSE_PIECE, 0);
+			this.templatePosition = new BlockPos(0, 90, 0); //BlockPos.ZERO
+			this.setupTemplate(templateMgr);
+		}
+
+		private void setupTemplate(TemplateManager templateMgr) {
+	         Template template = templateMgr.getTemplateDefaulted(StrucTest.HOUSE_LOC);
+	         PlacementSettings placementsettings = (new PlacementSettings())
+	        		 	.setRotation(Rotation.NONE)
+	        		 	.setMirror(Mirror.NONE)
+	        		 	.setCenterOffset(BlockPos.ZERO)
+	        		 	.addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
+			 StrucTest.LOGGER.info("from inside setupTemplate");
+	         this.setup(template, this.templatePosition, placementsettings);
+		}
+		
+		@Override
+		public boolean func_225577_a_(IWorld worldIn, ChunkGenerator<?> chunkGenIn, Random rand, MutableBoundingBox mutableBB, ChunkPos chunkPos) {
+			PlacementSettings placementsettings = (new PlacementSettings()).setRotation(Rotation.NONE).setMirror(Mirror.NONE).setCenterOffset(BlockPos.ZERO).addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
+			BlockPos blockpos1 = this.templatePosition.add(Template.transformedBlockPos(placementsettings, new BlockPos(3, 0, 0)));
+			int strucHeight = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, blockpos1.getX(), blockpos1.getZ());
+			this.templatePosition = this.templatePosition.add(0, strucHeight, 0);
+			boolean superReturn = super.func_225577_a_(worldIn, chunkGenIn, rand, mutableBB, chunkPos);
+			return superReturn;
+		}
+
+		
+		
+		@Override
+		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
+				MutableBoundingBox sbb) {
+		}
+	}
+
+}
