@@ -45,7 +45,6 @@ public class StrucTest {
 		DeferredWorkQueue.runLater(() -> {
 			Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
 			biomes.forEachRemaining((biome) -> {
-				LOGGER.info("Adding feature to biome "+biome.getDisplayName().getFormattedText());
 				biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, BRICK_HOUSE.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.TOP_SOLID_HEIGHTMAP.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
 			});
 		});

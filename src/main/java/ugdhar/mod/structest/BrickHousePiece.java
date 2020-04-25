@@ -40,7 +40,6 @@ public class BrickHousePiece {
 	        		 	.setMirror(Mirror.NONE)
 	        		 	.setCenterOffset(BlockPos.ZERO)
 	        		 	.addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_BLOCK);
-			 StrucTest.LOGGER.info("from inside setupTemplate");
 	         this.setup(template, this.templatePosition, placementsettings);
 		}
 		
