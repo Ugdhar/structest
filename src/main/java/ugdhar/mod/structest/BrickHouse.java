@@ -1,5 +1,6 @@
 package ugdhar.mod.structest;
 
+import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
@@ -7,8 +8,10 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.ScatteredStructure;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -19,6 +22,14 @@ public class BrickHouse extends ScatteredStructure<NoFeatureConfig> {
 
 	public BrickHouse(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
+	}
+
+	@Override
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand,
+			BlockPos pos, NoFeatureConfig config) {
+		// TODO Auto-generated method stub
+		boolean placeRes = super.place(worldIn, generator, rand, pos, config); 
+		return placeRes;
 	}
 
 	@Override
