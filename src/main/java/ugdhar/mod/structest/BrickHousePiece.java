@@ -27,9 +27,9 @@ public class BrickHousePiece {
 			this.setupTemplate(templateMgr);
 		}
 
-		public Piece(TemplateManager templateMgr, ResourceLocation p_i49313_2_, BlockPos p_i49313_3_, Rotation p_i49313_4_, int p_i49313_5_) {
+		public Piece(TemplateManager templateMgr, ResourceLocation resLoc, BlockPos blockPos, Rotation rot, int offsetY) {
 			super(StrucTest.BRICK_HOUSE_PIECE, 0);
-			this.templatePosition = new BlockPos(0, 90, 0); //BlockPos.ZERO
+			this.templatePosition = new BlockPos(blockPos.getX(), blockPos.getY() - offsetY, blockPos.getZ());
 			this.setupTemplate(templateMgr);
 		}
 
@@ -58,6 +58,7 @@ public class BrickHousePiece {
 		@Override
 		protected void handleDataMarker(String function, BlockPos pos, IWorld worldIn, Random rand,
 				MutableBoundingBox sbb) {
+			// empty, don't think I needed this for such a simple example? 
 		}
 	}
 
