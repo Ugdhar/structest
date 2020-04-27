@@ -5,11 +5,14 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -25,11 +28,33 @@ public class BrickHouse extends ScatteredStructure<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand,
-			BlockPos pos, NoFeatureConfig config) {
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		// TODO Auto-generated method stub
-		boolean placeRes = super.place(worldIn, generator, rand, pos, config); 
-		return placeRes;
+	      if (!worldIn.getWorldInfo().isMapFeaturesEnabled()) {
+	          return false;
+	       } else {
+	          int i = pos.getX() >> 4;
+	          int j = pos.getZ() >> 4;
+	          int k = i << 4;
+	          int l = j << 4;
+	          boolean flag = false;
+	          IChunk chnk = worldIn.getChunk(i, j);
+	          LongSet structRefs = chnk.getStructureReferences(this.getStructureName());
+	          // Never make it inside this for block, the structureReferences is empty.
+	          // this method is a copy of the super.place method
+	          for(Long olong : structRefs) {
+	             ChunkPos chunkpos = new ChunkPos(olong);
+	             StructureStart structurestart = worldIn.getChunk(chunkpos.x, chunkpos.z).getStructureStart(this.getStructureName());
+	             if (structurestart != null && structurestart != StructureStart.DUMMY) {
+	                structurestart.func_225565_a_(worldIn, generator, rand, new MutableBoundingBox(k, l, k + 15, l + 15), new ChunkPos(i, j));
+	                flag = true;
+	             }
+	          }
+
+	          return flag;
+	       }
+		//boolean placeRes = super.place(worldIn, generator, rand, pos, config); 
+		//return placeRes;
 	}
 
 	@Override
@@ -49,7 +74,7 @@ public class BrickHouse extends ScatteredStructure<NoFeatureConfig> {
 
 	@Override
 	public int getSize() {
-		return 1;
+		return 8;
 	}
 
 	public class Start extends StructureStart {
