@@ -12,6 +12,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
@@ -25,6 +26,18 @@ public class BrickHouse extends ScatteredStructure<NoFeatureConfig> {
 
 	public BrickHouse(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
+	}
+	
+	@Override
+	public boolean func_225558_a_(BiomeManager biomeManagerIn, ChunkGenerator<?> generatorIn, Random randIn, int chunkX, int chunkZ, Biome biomeIn) {
+	      ChunkPos chunkpos = this.getStartPositionForPosition(generatorIn, randIn, chunkX, chunkZ, 0, 0);
+	      boolean xMatch = chunkX == chunkpos.x;
+	      boolean zMatch = chunkZ == chunkpos.z;
+	      boolean hasStruct = generatorIn.hasStructure(biomeIn, this);
+    	  boolean result = xMatch && zMatch && hasStruct;
+	      if(xMatch && zMatch)
+	    	  StrucTest.LOGGER.info("Matching!");
+	      return  result;
 	}
 
 	@Override
