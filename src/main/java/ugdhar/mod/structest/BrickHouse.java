@@ -38,7 +38,7 @@ public class BrickHouse extends ScatteredStructure<NoFeatureConfig> {
 
 	@Override
 	public int getSize() {
-		return 8;
+		return 1;
 	}
 
 	public class Start extends StructureStart {
