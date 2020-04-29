@@ -8,4 +8,4 @@ Forums post: https://www.minecraftforge.net/forum/topic/84458-1152-structure-gen
 
 Thanks to these guys for helping me find the places I missed stuff!
 
-If anyone has any good links to references explaining how feature Platement configuration works, or structure Templates, definitely open an issue with links or something!
+If anyone has any good links to references explaining how feature Placement configuration works, or structure Templates, definitely open an issue with links or something!
