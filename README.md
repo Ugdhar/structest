@@ -4,7 +4,7 @@ I just started messing with trying to make something I built with a structure bl
 I had mostly been basing my code on the igloo code, as it to me seemed easiest to understand.
 It was not working, so I posted on the Forge modder support forums, because I was blind to what I was doing wrong. :(
 
-Forums post: https://www.minecraftforge.net/forum/topic/84458-1152-structure-generation
+Forums post: https://forums.minecraftforge.net/index.php?/topic/84458-solved-1152-structure-generation/
 
 Thanks to these guys for helping me find the places I missed stuff!
 
